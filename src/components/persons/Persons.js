@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Person from "./person/Person";
 
-export default class Persons extends Component {
+export default class Persons extends PureComponent {
   constructor(props) {
     super(props);
     console.log("[Persons.js] inside this constructor", props);
@@ -12,6 +12,33 @@ export default class Persons extends Component {
   }
   componentDidMount() {
     console.log("persons didmount");
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(
+      "[UPDATE Persons.js] inside this.componentWillReceiveProps",
+      nextProps
+    );
+  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(
+  //     "update persons.js inside shouldcomponentupdate",
+  //     nextProps,
+  //     "aha",
+  //     nextState
+  //   );
+  //   return (
+  //     nextProps.persons !== this.props.persons ||
+  //     nextProps.changed !== this.props.clicked
+  //   );
+  //   // return true;
+  // }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("Update persons.js componentwillupdate", nextProps, nextState);
+  }
+  componentDidUpdate() {
+    console.log("Update persons.js componentDidUpdate");
   }
   render() {
     console.log("persons inside render");
