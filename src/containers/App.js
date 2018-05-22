@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 import classes from "./App.css";
 import Persons from "../components/persons/Persons";
 import Cockpit from "../components/cockpit/Cockpit";
+import Aux from "../hoc/AuxHOC";
+import withClass from "../hoc/withClass";
 
 class App extends PureComponent {
   constructor(props) {
@@ -14,7 +16,8 @@ class App extends PureComponent {
         { id: "per3", name: "matias", age: 21 }
       ],
       otherState: "some other value",
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0
     };
   }
   //kenapa gamau jalan ini
@@ -69,7 +72,12 @@ class App extends PureComponent {
   };
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow });
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1
+      };
+    });
   };
 
   render() {
@@ -89,7 +97,7 @@ class App extends PureComponent {
     }
 
     return (
-      <div className={classes.App}>
+      <Aux>
         <button
           onClick={() => {
             this.setState({ showPersons: true });
@@ -104,9 +112,9 @@ class App extends PureComponent {
           clicked={this.togglePersonHandler}
         />
         {persons}
-      </div>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

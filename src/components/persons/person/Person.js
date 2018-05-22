@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import classes from "./Person.css";
+import withClass from "../../../hoc/withClass";
+import Aux from "../../../hoc/AuxHOC";
 
-export default class Person extends Component {
+class Person extends Component {
   constructor(props) {
     super(props);
     console.log("[Person.js] inside this constructor", props);
@@ -17,7 +19,7 @@ export default class Person extends Component {
     console.log("person inside render");
 
     return (
-      <div className={classes.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old
         </p>
@@ -28,7 +30,7 @@ export default class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </div>
+      </Aux>
     );
     // return [
     //   <p key="1" onClick={this.props.click}>
@@ -45,3 +47,5 @@ export default class Person extends Component {
     // ];
   }
 }
+
+export default withClass(Person, classes.Person);
