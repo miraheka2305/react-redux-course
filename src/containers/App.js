@@ -11,7 +11,7 @@ class App extends PureComponent {
     console.log("[App.js] inside this constructor", props);
     this.state = {
       persons: [
-        { id: "per1", name: "mirah", age: 21 },
+        { id: "per1", name: "mirah", age: 22 },
         { id: "per2", name: "adhi", age: 22 },
         { id: "per3", name: "matias", age: 21 }
       ],
@@ -72,6 +72,7 @@ class App extends PureComponent {
   };
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
+    // depend on prevState, setState correctl
     this.setState((prevState, props) => {
       return {
         showPersons: !doesShow,

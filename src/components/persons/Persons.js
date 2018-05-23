@@ -46,6 +46,7 @@ export default class Persons extends PureComponent {
       return (
         <Person
           click={() => this.props.clicked(index)}
+          position={index}
           name={person.name}
           age={person.age}
           key={person.id}

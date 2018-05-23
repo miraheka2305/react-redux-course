@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import classes from "./Person.css";
 import withClass from "../../../hoc/withClass";
 import Aux from "../../../hoc/AuxHOC";
@@ -14,6 +15,9 @@ class Person extends Component {
   }
   componentDidMount() {
     console.log("person didmount");
+    if (this.props.position === 0) {
+      this.inputElement.focus();
+    }
   }
   render() {
     console.log("person inside render");
@@ -26,6 +30,9 @@ class Person extends Component {
         <p>{this.props.children}</p>
         {/* props.children itu digunain utk menambahkan content pada component tsb dari luar */}
         <input
+          ref={inp => {
+            this.inputElement = inp;
+          }}
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
@@ -47,5 +54,13 @@ class Person extends Component {
     // ];
   }
 }
+
+//make the type of propsm can't apply in functional
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);
