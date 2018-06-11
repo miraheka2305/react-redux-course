@@ -8,7 +8,6 @@ import withClass from "../hoc/withClass";
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    console.log("[App.js] inside this constructor", props);
     this.state = {
       persons: [
         { id: "per1", name: "mirah", age: 22 },
@@ -17,16 +16,16 @@ class App extends PureComponent {
       ],
       otherState: "some other value",
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     };
   }
-  //kenapa gamau jalan ini
-  componentWillMount() {
-    console.log("[App.js] inside componentwillmount");
-  }
-  componentDidMount() {
-    console.log("afterrender");
-  }
+  // componentWillMount() {
+  //   console.log("[App.js] inside componentwillmount");
+  // }
+  // componentDidMount() {
+  //   console.log("afterrender");
+  // }
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log(
@@ -41,12 +40,12 @@ class App extends PureComponent {
   //   );
   // }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("Update app.js componentwillupdate", nextProps, nextState);
-  }
-  componentDidUpdate() {
-    console.log("Update app.js componentDidUpdate");
-  }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log("Update app.js componentwillupdate", nextProps, nextState);
+  // }
+  // componentDidUpdate() {
+  //   console.log("Update app.js componentDidUpdate");
+  // }
   // masih ga paham sih ini
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -72,7 +71,6 @@ class App extends PureComponent {
   };
   togglePersonHandler = () => {
     const doesShow = this.state.showPersons;
-    // depend on prevState, setState correctl
     this.setState((prevState, props) => {
       return {
         showPersons: !doesShow,
@@ -81,9 +79,12 @@ class App extends PureComponent {
     });
   };
 
+  // loginHandler = () => {
+  //   this.setState({
+  //     authenticated: true
+  //   });
+  // };
   render() {
-    console.log("indiside render");
-
     let persons = null;
 
     if (this.state.showPersons) {
@@ -92,9 +93,9 @@ class App extends PureComponent {
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
           changed={this.nameChangedHandler}
+          // isAuthenticated={this.state.authenticated}
         />
       );
-      // {/* output the list of persons *};
     }
 
     return (
@@ -110,6 +111,7 @@ class App extends PureComponent {
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
+          // login={this.loginHandler}
           clicked={this.togglePersonHandler}
         />
         {persons}

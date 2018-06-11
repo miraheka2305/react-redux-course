@@ -21,8 +21,9 @@ const cockpit = props => {
         I want to start learn about ReactJS
       </p>
       <button className={btnClass} onClick={props.clicked}>
-        Toggle Persons{" "}
+        Toggle Persons
       </button>
+      <button onClick={props.login}>Log in</button>
     </Aux>
   );
 };

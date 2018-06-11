@@ -4,22 +4,23 @@ import Person from "./person/Person";
 export default class Persons extends PureComponent {
   constructor(props) {
     super(props);
-    console.log("[Persons.js] inside this constructor", props);
+    this.lastPersonRef = React.createRef();
   }
   //kenapa gamau jalan ini
-  componentWillMount() {
-    console.log("[Persons.js] inside componentwillmount");
-  }
+  // componentWillMount() {
+  //   console.log("[Persons.js] inside componentwillmount");
+  // }
   componentDidMount() {
-    console.log("persons didmount");
+    // console.log("persons didmount");
+    this.lastPersonRef.current.focus();
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(
-      "[UPDATE Persons.js] inside this.componentWillReceiveProps",
-      nextProps
-    );
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(
+  //     "[UPDATE Persons.js] inside this.componentWillReceiveProps",
+  //     nextProps
+  //   );
+  // }
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log(
   //     "update persons.js inside shouldcomponentupdate",
@@ -34,14 +35,13 @@ export default class Persons extends PureComponent {
   //   // return true;
   // }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("Update persons.js componentwillupdate", nextProps, nextState);
-  }
-  componentDidUpdate() {
-    console.log("Update persons.js componentDidUpdate");
-  }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log("Update persons.js componentwillupdate", nextProps, nextState);
+  // }
+  // componentDidUpdate() {
+  //   console.log("Update persons.js componentDidUpdate");
+  // }
   render() {
-    console.log("persons inside render");
     return this.props.persons.map((person, index) => {
       return (
         <Person
@@ -49,6 +49,8 @@ export default class Persons extends PureComponent {
           position={index}
           name={person.name}
           age={person.age}
+          ref={this.lastPersonRef}
+          // authenticated={this.props.isAuthenticated}
           key={person.id}
           changed={event => this.props.changed(event, person.id)}
         />
